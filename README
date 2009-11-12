@@ -1,0 +1,8 @@
+Jetlagged
+---------
+
+jetlagged is a jetpack extension allowing to contextually translate some selected 
+text within any html page using the google translate API.
+
+Once installed, just select some text, right-click and translate it choosing the
+target language using the "Translate" contextual menu.

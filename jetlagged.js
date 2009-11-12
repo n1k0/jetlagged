@@ -20,7 +20,6 @@ jetpack.menu.context.page.add(function(target)({
     }
     var url = 'http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=' 
       + escape(jetpack.selection.text) + '&langpair=|' + menuItem.data;
-    jetpack.notifications.show(url);
     $.getJSON(url, function(result){
       if (result.responseStatus != 200) {
         jetpack.notifications.show('Error while trying to reach the google translation API (' + result.responseStatus + ')');

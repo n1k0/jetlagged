@@ -11,7 +11,7 @@ jetpack.future.import("menu");
 jetpack.future.import("selection");
 
 jetpack.menu.context.page.add(function(target)({
-  label: "Translate",
+  label: "Translate to...",
   icon:  "http://translate.google.com/favicon.ico",  
   menu:  new jetpack.Menu(langs),
   command: function(menuItem){
@@ -22,46 +22,46 @@ jetpack.menu.context.page.add(function(target)({
       + escape(jetpack.selection.text) + '&langpair=|' + menuItem.data;
     $.getJSON(url, function(result){
       if (result.responseStatus != 200) {
-        jetpack.notifications.show('Error while trying to reach the google translation API (' + result.responseStatus + ')');
+        return jetpack.notifications.show('Error while trying to reach the google translation API (' + result.responseStatus + ')');
       }
-      jetpack.selection.html = '<span style="background:yellow;color:black">' + result.responseData.translatedText + '</span>';
+      return jetpack.selection.html = '<span style="background:yellow;color:black">' + result.responseData.translatedText + '</span>';
     });
   }
 }));
 
 var langs = [
-  { label: 'arabic', data: 'ar' },
-  { label: 'armenian', data: 'hy' },
-  { label: 'bengali', data: 'bn' },
-  { label: 'bulgarian', data: 'bg' },
-  { label: 'chinese', data: 'zh' },
-  { label: 'danish', data: 'da' },
-  { label: 'dutch', data: 'nl'},  
-  { label: 'english', data: 'en' },
-  { label: 'filipino', data: 'tl' },
-  { label: 'finnish', data: 'fi' },
-  { label: 'french', data: 'fr' },
-  { label: 'german', data: 'de' },
-  { label: 'greek', data: 'el' },
-  { label: 'hebrew', data: 'iw' },
-  { label: 'hindi', data: 'hi' },
-  { label: 'hungarian', data: 'hu' },
-  { label: 'irish', data: 'ga' },
-  { label: 'italian', data: 'it' },
-  { label: 'japanese', data: 'ja' },
-  { label: 'norwegian', data: 'no' },
-  { label: 'polish', data: 'pl' },
-  { label: 'portuguese', data: 'pt-pt' },
-  { label: 'romanian', data: 'ro' },
-  { label: 'russian', data: 'ru' },
-  { label: 'serbian', data: 'sr' },
-  { label: 'slovak', data: 'sk' },
-  { label: 'slovenian', data: 'sl' },
-  { label: 'spanish', data: 'es' },
-  { label: 'swedish', data: 'sv' },
-  { label: 'tamil', data: 'ta' },
-  { label: 'thai', data: 'th' },
-  { label: 'turkish', data: 'tr' },
-  { label: 'ukrainian', data: 'uk' },
-  { label: 'vietnamese', data: 'vi' },
+  { label: 'Arabic', data: 'ar' },
+  { label: 'Armenian', data: 'hy' },
+  { label: 'Bengali', data: 'bn' },
+  { label: 'Bulgarian', data: 'bg' },
+  { label: 'Chinese', data: 'zh' },
+  { label: 'Danish', data: 'da' },
+  { label: 'Dutch', data: 'nl'},  
+  { label: 'English', data: 'en' },
+  { label: 'Filipino', data: 'tl' },
+  { label: 'Finnish', data: 'fi' },
+  { label: 'French', data: 'fr' },
+  { label: 'German', data: 'de' },
+  { label: 'Greek', data: 'el' },
+  { label: 'Hebrew', data: 'iw' },
+  { label: 'Hindi', data: 'hi' },
+  { label: 'Hungarian', data: 'hu' },
+  { label: 'Irish', data: 'ga' },
+  { label: 'Italian', data: 'it' },
+  { label: 'Japanese', data: 'ja' },
+  { label: 'Norwegian', data: 'no' },
+  { label: 'Polish', data: 'pl' },
+  { label: 'Portuguese', data: 'pt-pt' },
+  { label: 'Romanian', data: 'ro' },
+  { label: 'Russian', data: 'ru' },
+  { label: 'Serbian', data: 'sr' },
+  { label: 'Slovak', data: 'sk' },
+  { label: 'Slovenian', data: 'sl' },
+  { label: 'Spanish', data: 'es' },
+  { label: 'Swedish', data: 'sv' },
+  { label: 'Tamil', data: 'ta' },
+  { label: 'Thai', data: 'th' },
+  { label: 'Turkish', data: 'tr' },
+  { label: 'Ukrainian', data: 'uk' },
+  { label: 'Vietnamese', data: 'vi' },
 ];

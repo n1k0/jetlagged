@@ -1,9 +1,15 @@
 /**
- * jetlagged is a jetpack extension allowing to contextually translate some selected 
- * text within any html page using the google translate API.
+ * Jet Lagged is a jetpack extension allowing to contextually translate some selected text within any 
+ * html page using the google translate API.
  *
- * Once installed, just select some text, right-click and translate it choosing the
- * target language using the "Translate" contextual menu.
+ * Once installed, just select some text, right-click and translate it choosing the target language 
+ * using the "Translate" contextual menu.
+ *
+ * If not text is selected, the whole page will be translated. 
+ *
+ * Please note that in both cases, the original language will be guessed by Google, so you might 
+ * obtain unexpected results, especially with small portions of text or ones containing lot of unusual 
+ * terms.
  *
  * @author Nicolas Perriault <nperriault@gmail.com>
  */
@@ -16,15 +22,19 @@ jetpack.menu.context.page.add(function(target)({
   menu:  new jetpack.Menu(langs),
   command: function(menuItem){
     if (!jetpack.selection.text || '' == jetpack.selection.text) {
-      return jetpack.notifications.show('Empty selection');
+      return target.document.location = 'http://translate.google.com/translate?js=y&hl=fr&ie=UTF-8&u=' 
+                                      + escape(target.document.location) + '&sl=&tl=' + menuItem.data;
     }
     var url = 'http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=' 
-      + escape(jetpack.selection.text) + '&langpair=|' + menuItem.data;
+            + escape(jetpack.selection.text) + '&langpair=|' + menuItem.data;
     $.getJSON(url, function(result){
       if (result.responseStatus != 200) {
-        return jetpack.notifications.show('Error while trying to reach the google translation API (' + result.responseStatus + ')');
+        return jetpack.notifications.show('Error while trying to reach the google translation API (' 
+                                          + result.responseStatus + ')');
       }
-      return jetpack.selection.html = '<span style="background:yellow;color:black">' + result.responseData.translatedText + '</span>';
+      return jetpack.selection.html = '<span style="background:yellow;color:black">' 
+                                    + result.responseData.translatedText 
+                                    + '</span>';
     });
   }
 }));
